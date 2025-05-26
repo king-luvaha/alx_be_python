@@ -1,56 +1,39 @@
-def get_task():
-    task = input("Enter your task for today: ").strip()
-    return task
-
-def get_priority():
-    priority = input("Enter task priority (High/Medium/Low): ").strip().capitalize()
-    valid_priorities = ["High", "Medium", "Low"]
-    while priority not in valid_priorities:
-        print("Invalid priority. Please enter High, Medium, or Low.")
-        priority = input("Enter task priority (High/Medium/Low): ").strip().capitalize()
-    return priority
-
-def get_time_bound():
-    time_bound = input("Is this task time-bound? (Yes/No): ").strip().lower()
-    while time_bound not in ["yes", "no"]:
-        print("Please answer with Yes or No.")
-        time_bound = input("Is this task time-bound? (Yes/No): ").strip().lower()
-    return time_bound == "yes"
-
-def create_reminder(task, priority, time_bound):
-    match priority:
-        case "High":
-            priority_msg = "🔥 High Priority!"
-        case "Medium":
-            priority_msg = "⚡ Medium Priority"
-        case "Low":
-            priority_msg = "✅ Low Priority"
-        case _:
-            priority_msg = ""
-
-    if time_bound:
-        time_msg = "⏰ This task has a deadline. Don't forget to schedule it!"
-    else:
-        time_msg = "📅 No specific deadline for this task."
-
-    reminder = (
-        f"Reminder:\n"
-        f"Task: {task}\n"
-        f"Priority: {priority_msg}\n"
-        f"{time_msg}"
-    )
-    return reminder
+def get_input(prompt, valid_options=None):
+    while True:
+        response = input(prompt).strip().lower()
+        if valid_options:
+            if response in valid_options:
+                return response
+            else:
+                print(f"Please enter one of the following: {', '.join(valid_options)}")
+        else:
+            if response:
+                return response
+            else:
+                print("Input cannot be empty.")
 
 def main():
-    print("=== Daily Reminder Setup ===")
-    task = get_task()
-    priority = get_priority()
-    time_bound = get_time_bound()
-    
-    reminder_message = create_reminder(task, priority, time_bound)
-    print("\n" + "="*30)
-    print(reminder_message)
-    print("="*30 + "\n")
+    task = get_input("Enter your task: ")
+    priority = get_input("Priority (high/medium/low): ", valid_options={"high", "medium", "low"})
+    time_bound = get_input("Is it time-bound? (yes/no): ", valid_options={"yes", "no"})
+
+    reminder = ""
+
+    match priority:
+        case "high":
+            reminder = f"'{task}' is a high priority task"
+        case "medium":
+            reminder = f"'{task}' is a medium priority task"
+        case "low":
+            reminder = f"'{task}' is a low priority task"
+
+    if time_bound == "yes":
+        reminder += " that requires immediate attention today!"
+    else:
+        reminder += ". Consider completing it when you have free time."
+
+    print("\nReminder:", reminder)
+
 
 if __name__ == "__main__":
     main()
