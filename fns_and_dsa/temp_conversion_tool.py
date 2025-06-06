@@ -1,15 +1,15 @@
-# Global conversion factors - must be defined exactly like this
-CELSIUS_TO_FAHRENHEIT_FACTOR = 9/5
+# Global conversion factors
 FAHRENHEIT_TO_CELSIUS_FACTOR = 5/9
+CELSIUS_TO_FAHRENHEIT_FACTOR = 9/5
 TEMPERATURE_OFFSET = 32
-# No additional code needed here
+
 def convert_to_celsius(fahrenheit):
     """Convert Fahrenheit temperature to Celsius"""
-    return (fahrenheit - TEMPERATURE_OFFSET) * FAHRENHEIT_TO_CELSIUS_FACTOR
+    return (fahrenheit - 32) * FAHRENHEIT_TO_CELSIUS_FACTOR
 
 def convert_to_fahrenheit(celsius):
     """Convert Celsius temperature to Fahrenheit"""
-    return (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + TEMPERATURE_OFFSET
+    return celsius * CELSIUS_TO_FAHRENHEIT_FACTOR + 32
 
 def main():
     print("Temperature Conversion Tool")
