@@ -2,7 +2,7 @@
 CELSIUS_TO_FAHRENHEIT_FACTOR = 9 / 5
 FAHRENHEIT_TO_CELSIUS_FACTOR = 5 / 9
 TEMPERATURE_OFFSET = 32
-
+# No additional code needed here
 def convert_to_celsius(fahrenheit):
     """Convert Fahrenheit temperature to Celsius"""
     return (fahrenheit - TEMPERATURE_OFFSET) * FAHRENHEIT_TO_CELSIUS_FACTOR
